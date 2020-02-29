@@ -38,21 +38,63 @@ function Counter(props) {
   );
 }
 
+class AddPlayerForm extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: "",
+    }
+    this.onNameChange = this.onNameChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+  }
+  onNameChange(e) {
+    this.setState({name: e.target.value});
+  }
+  onSubmit(e) {
+    e.preventDefault();
+    this.props.onAdd(this.state.name);
+    this.setState({name: ""})
+  }
+  render() {
+    return (
+      <div className="add-player-form">
+        <form onSubmit={this.onSubmit}>
+          <input type="text" value={this.state.name} onChange={this.onNameChange} />
+          <input type="submit" value="Add Player" />
+        </form>
+      </div>
+    );
+  }
+}
+
+
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       players: this.props.initialPlayers,
-      
+      nextId: this.props.initialPlayers.length + 1,
     }
-    
+    this.onPlayerAdd = this.onPlayerAdd.bind(this);
   }
+    
   onScoreChange(index, delta) {
     let players = this.state.players.slice();
     players[index].score += delta;
     this.setState({players: players});
   }
-
+    
+  onPlayerAdd(name) {
+    let players = this.state.players.slice();
+    players.push({
+      name: name,
+      score: 0,
+      id: this.state.nextId,    
+    });
+    this.setState({players: players});
+    this.setState({nextId: this.state.nextId + 1})
+  }
+    
   onPlayerRemove(index) {
     let players = this.state.players.slice();
     players.splice(index, 1);
@@ -78,7 +120,8 @@ class App extends Component {
                 onRemove={() => {this.onPlayerRemove(index)}} />
             )
           })}         
-        </div>      
+        </div>     
+            <AddPlayerForm onAdd={this.onPlayerAdd} />
         </div>    
     );
   }
