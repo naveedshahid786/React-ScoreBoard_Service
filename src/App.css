@@ -88,3 +88,57 @@ body {
     cursor: pointer;
     color: red;
 }
+
+.add-player-form form {
+    display: flex;
+    background-color: #222;
+    border-radius: 0 0 20px 20px
+  }
+  
+    .add-player-form input[type=text] {
+      flex-grow: 1;
+    border-width: 0 0 1px 0;
+    margin: 15px 10px 15px 15px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: white;
+    border-style: none;
+    text-shadow: none;
+    text-transform: uppercase;
+    color: black;
+    letter-spacing: 1px;
+    outline: none;
+      
+    }
+  
+    .add-player-form input[type=text]::-webkit-input-placeholder{
+      color: black;
+      letter-spacing: 2px;
+    }
+  
+    .add-player-form input[type=text]:focus{
+      background-color: white;
+    }
+  
+    .add-player-form input[type=submit] {
+    display: block;
+    font-size: .6em;
+    margin: 15px 15px 15px 0; 
+    padding: 10px;
+    background-color: white;
+    border-radius: 5px;
+    border: none;
+    color: black;
+    letter-spacing: 2px;
+    font-weight: bold;
+    text-shadow: none;
+    text-transform: uppercase;
+    }
+  
+    .add-player-form input[type=submit]:hover{
+      background: #4b71b5;
+      color: #fafafa;
+      cursor: pointer;
+    }
+
+

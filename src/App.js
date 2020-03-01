@@ -38,6 +38,42 @@ function Counter(props) {
   );
 }
 
+class Sorting extends React.Component {
+
+  constructor(props) {
+      super(props);
+      this.state = {
+        sort: ''
+      }
+      this.handleSort = this.handleSort.bind(this);
+  this.onSort = this.onSort.bind(this);
+    }
+
+    handleSort = (e) => {
+        this.setState({ sort: e.target.value })
+    }
+    onSort(e) {
+      e.preventDefault();
+      this.props.onAdd(this.state.sort);
+      this.setState({sort: ""})
+    }
+    render() {
+        
+      return (
+        <div className="sorting">
+          <form onSubmit={this.props.Player}>
+          <select defaultValue="Sort" onChange={this.props.handleSort}>
+              <option disabled value="Sort">Sort</option>
+              <option value="Highest">Highest</option>
+              <option value="Lowest">Lowest</option>
+          </select>
+            
+          </form>
+        </div>
+      );
+    }
+  }
+
 class AddPlayerForm extends Component {
   constructor(props) {
     super(props);
@@ -60,7 +96,7 @@ class AddPlayerForm extends Component {
       <div className="add-player-form">
         <form onSubmit={this.onSubmit}>
           <input type="text" value={this.state.name} onChange={this.onNameChange} />
-          <input type="submit" value="Add Player" />
+          <input type="submit" value="Add New Player" />
         </form>
       </div>
     );
@@ -120,7 +156,8 @@ class App extends Component {
                 onRemove={() => {this.onPlayerRemove(index)}} />
             )
           })}         
-        </div>     
+        </div>    
+            <Sorting handleSort={this.handleSort}/>
             <AddPlayerForm onAdd={this.onPlayerAdd} />
         </div>    
     );
